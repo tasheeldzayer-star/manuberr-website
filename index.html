@@ -4,252 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MANUBERR - Équipements de Levage & Manutention</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
         }
+
         header {
-            background: linear-gradient(135deg, #003A99 0%, #004BA8 100%);
+            background: linear-gradient(135deg, #003a99 0%, #004BA8 100%);
             color: white;
-            padding: 2rem;
-            position: sticky;
-            top: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 100;
-        }
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        .hero {
-            background: linear-gradient(135deg, #003A99 0%, #004BA8 100%);
-            color: white;
-            padding: 6rem 2rem;
+            padding: 3rem 2rem;
             text-align: center;
         }
-        .hero h1 {
-            font-size: 48px;
+
+        header h1 {
+            font-size: 42px;
             margin-bottom: 1rem;
         }
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 2rem;
+
+        header p {
+            font-size: 18px;
             opacity: 0.9;
+            margin-bottom: 2rem;
         }
+
         .btn {
             display: inline-block;
-            background: #FFA500;
+            background: #ffa500;
             color: white;
-            padding: 14px 32px;
+            padding: 12px 30px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
-            border: none;
-            cursor: pointer;
         }
+
         .btn:hover {
-            background: #FF8C00;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        .container {
+
+        section {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 3rem 2rem;
         }
-        section {
-            padding: 4rem 0;
-            border-bottom: 1px solid #eee;
-        }
+
         h2 {
-            color: #003A99;
-            font-size: 36px;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-        .contact-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-        .contact-info {
-            background: #f9f9f9;
-            padding: 2rem;
-            border-radius: 8px;
-        }
-        .contact-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #eee;
-        }
-        .contact-item:last-child {
-            border-bottom: none;
-        }
-        .contact-item h3 {
-            color: #003A99;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 18px;
-        }
-        .contact-item .icon {
-            font-size: 24px;
-            color: #FFA500;
-            width: 30px;
-            text-align: center;
-        }
-        .contact-item p {
-            margin-bottom: 0.5rem;
-            color: #666;
-        }
-        .contact-item a {
-            color: #003A99;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-        .address-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            border-left: 4px solid #FFA500;
-        }
-        .address-box h3 {
-            color: #003A99;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .address-box p {
-            line-height: 1.8;
-            color: #666;
-        }
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        .about-text h3 {
-            color: #003A99;
-            font-size: 24px;
-            margin-bottom: 1rem;
-        }
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #666;
-            line-height: 1.8;
-        }
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .stat {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .stat .number {
+            color: #003a99;
+            margin-bottom: 1.5rem;
             font-size: 32px;
-            color: #FFA500;
-            font-weight: bold;
         }
-        .stat .label {
-            color: #003A99;
-            font-size: 14px;
-            margin-top: 0.5rem;
-        }
-        .services-grid {
+
+        .content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
+            align-items: center;
         }
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        .service-card .icon {
-            font-size: 48px;
-            color: #FFA500;
-            margin-bottom: 1rem;
-        }
-        .service-card h3 {
-            color: #003A99;
-            margin-bottom: 0.75rem;
-        }
-        .service-card p {
-            color: #666;
-            font-size: 14px;
-        }
-        footer {
+
+        .footer {
             background: #333;
             color: white;
             text-align: center;
             padding: 2rem;
+            margin-top: 3rem;
         }
-        footer p {
-            opacity: 0.9;
-        }
+
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            .hero h1 {
-                font-size: 32px;
-            }
-            .contact-section, .about-content, .services-grid {
+            .content {
                 grid-template-columns: 1fr;
             }
-            h2 {
+            header h1 {
                 font-size: 28px;
             }
         }
@@ -257,136 +90,44 @@
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="logo">🏭 MANUBERR</div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#apropos">À Propos</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <section class="hero" id="accueil">
         <h1>Équipements de Levage & Manutention</h1>
         <p>Solutions professionnelles pour l'industrie, le BTP, la marine et les infrastructures portuaires</p>
-        <a href="#contact" class="btn">📞 Nous Contacter</a>
-    </section>
+        <a href="mailto:contact@manuberr.com" class="btn">Demander une offre</a>
+    </header>
 
-    <section id="apropos">
-        <div class="container">
-            <h2>Qui sommes-nous ?</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>MANUBERR Group</h3>
-                    <p>Spécialisés dans la production et la commercialisation des équipements de levage et de manutention, MANUBERR est un groupe indépendant solidement implanté depuis 2014 dans la région centre d'Algérie.</p>
-                    <p>Nos solutions professionnelles répondent aux besoins les plus exigeants de l'industrie, du BTP, de la marine et des infrastructures portuaires.</p>
-                </div>
-                <div class="about-stats">
-                    <div class="stat">
-                        <div class="number">2014</div>
-                        <div class="label">Année de création</div>
-                    </div>
-                    <div class="stat">
-                        <div class="number">1000+</div>
-                        <div class="label">Clients satisfaits</div>
-                    </div>
-                    <div class="stat">
-                        <div class="number">24/7</div>
-                        <div class="label">Support technique</div>
-                    </div>
-                    <div class="stat">
-                        <div class="number">🏆</div>
-                        <div class="label">Certifiés ISO</div>
-                    </div>
-                </div>
+    <section style="background: #f9f9f9;">
+        <h2>Qui sommes-nous ?</h2>
+        <div class="content">
+            <div>
+                <h3 style="color: #003a99; margin-bottom: 1rem;">MANUBERR Group</h3>
+                <p>Spécialisés dans la production et la commercialisation des équipements de levage et de manutention, MANUBERR est un groupe indépendant solidement implanté depuis 2014 dans la région centre d'Algérie.</p>
+            </div>
+            <div>
+                <p><strong>Créée :</strong> 2014</p>
+                <p><strong>Localisation :</strong> Centre d'Algérie</p>
             </div>
         </div>
     </section>
 
-    <section id="services" style="background: #f9f9f9;">
-        <div class="container">
-            <h2>Nos Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon">🏗️</div>
-                    <h3>Équipements BTP</h3>
-                    <p>Solutions complètes pour le secteur du bâtiment et travaux publics</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">⚙️</div>
-                    <h3>Maintenance</h3>
-                    <p>Service technique professionnel 24/7 pour vos équipements</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">📦</div>
-                    <h3>Logistique</h3>
-                    <p>Transport et installation de vos équipements partout en Algérie</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">🎓</div>
-                    <h3>Formation</h3>
-                    <p>Formation complète pour l'utilisation sécurisée des équipements</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">💼</div>
-                    <h3>Consulting</h3>
-                    <p>Expertise et conseils pour optimiser votre production</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">✅</div>
-                    <h3>Garantie</h3>
-                    <p>Garantie complète et pièces de rechange disponibles</p>
-                </div>
+    <section>
+        <h2>Nous Contacter</h2>
+        <div class="content">
+            <div>
+                <p><strong>Téléphone Commercial :</strong></p>
+                <p>+213 (0)555121305</p>
+                <p></p>
+            </div>
+            <div>
+                <p><strong>Email :</strong></p>
+                <p><a href="mailto:contact@manuberr.com">contact@manuberr.com</a></p>
+                <p><strong>Adresse :</strong></p>
+                <p>Région Centre, Algérie</p>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="container">
-            <h2>Nous Contacter</h2>
-            <div class="contact-section">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h3><span class="icon">📞</span>Service Technique & Commercial</h3>
-                        <p><strong>Téléphone :</strong></p>
-                        <p>+213 (0)555 121 305</p>
-                    </div>
-
-                    <div class="contact-item">
-                        <h3><span class="icon">📧</span>Emails</h3>
-                        <p><strong>Commercial :</strong></p>
-                        <p><a href="mailto:commercial@manuberr.com">commercial@manuberr.com</a></p>
-                        <p><strong>Technique :</strong></p>
-                        <p><a href="mailto:info@manuberr.com">info@manuberr.com</a></p>
-                        <p><strong>Contact :</strong></p>
-                        <p><a href="mailto:contact@manuberr.com">contact@manuberr.com</a></p>
-                    </div>
-
-                    <div class="contact-item">
-                        <h3><span class="icon">🌐</span>Site Web</h3>
-                        <p><a href="https://www.manuberr.com">www.manuberr.com</a></p>
-                    </div>
-                </div>
-
-                <div class="address-box">
-                    <h3>📍 Notre Adresse</h3>
-                    <p>
-                        Cité Rabah Bouchkir lot n° 42<br>
-                        Local "B" Dar El Beida<br>
-                        Alger, Algérie<br><br>
-                        <strong>Région :</strong> Centre d'Algérie<br>
-                        <strong>Pays :</strong> Algérie
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2024 MANUBERR Group. Tous droits réservés. | Équipements de Levage & Manutention</p>
-        <p>contact@manuberr.com | +213 (0)555 121 305</p>
-    </footer>
+    <div class="footer">
+        <p>© 2024 MANUBERR Group. Tous droits réservés. | contact@manuberr.com</p>
+    </div>
 </body>
 </html>
