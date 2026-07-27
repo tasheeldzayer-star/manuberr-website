@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANUBERR Dashboard - Fusion Complet + Images</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=qFupTHGr8aC5Sb6420K9Ps8XnvsQ-GVcOfWR2tmX-yqakw0j4opOofd2pH0ZHAQMDEDv7myRPMXYNLBhE8Yckg" charset="UTF-8"></script><style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #003A99;
+            --secondary: #FFA500;
+            --success: #4CAF50;
+            --danger: #f44336;
+            --gray: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #004BA8 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .header h1 { font-size: 32px; margin-bottom: 0.5rem; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .header .badge { display: inline-block; background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-top: 0.5rem; font-weight: 600; }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 18px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--gray);
+            border: 2px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .nav-btn:hover { background: #e0e0e0; transform: translateX(3px); }
+        .nav-btn.active { background: var(--secondary); color: white; border-color: #FF8C00; }
+
+        .editor {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.3s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 13px;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="file"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 58, 153, 0.1);
+        }
+
+        textarea { resize: vertical; min-height: 80px; }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-success { background: var(--success); color: white; width: 100%; margin-bottom: 0.5rem; }
+        .btn-success:hover { background: #45a049; transform: translateY(-2px); }
+
+        .btn-secondary { background: var(--secondary); color: white; width: 100%; }
+        .btn-secondary:hover { background: #FF8C00; transform: translateY(-2px); }
+
+        .message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid var(--success);
+            display: block;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 13px;
+            color: var(--primary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 24px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .product-category {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .product-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 18px;
+        }
+
+        .image-preview {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 2px solid #ddd;
+        }
+
+        .hr {
+            margin: 1.5rem 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .step-card {
+            background: #fff8e1;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .step-card strong { color: var(--primary); display: block; margin-bottom: 0.5rem; }
+
+        @media (max-width: 1000px) {
+            .layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎛️ MANUBERR Dashboard</h1>
+            <span class="badge">✨ FUSION : Textes + Images + Tout le site</span>
+            <p>Modification complète du site + 12 catégories produits + upload d'images</p>
+        </div>
+
+        <div class="layout">
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <h2>📋 Sections</h2>
+                <button class="nav-btn active" onclick="switchSection('dashboard')">📊 Tableau de Bord</button>
+                <button class="nav-btn" onclick="switchSection('hero')">🏠 Hero</button>
+                <button class="nav-btn" onclick="switchSection('about')">ℹ️ À Propos</button>
+                <button class="nav-btn" onclick="switchSection('contact')">📞 Contact</button>
+                <button class="nav-btn" onclick="switchSection('products')">📦 Produits + Images</button>
+
+                <div class="hr"></div>
+
+                <button class="btn btn-success" onclick="saveData()">💾 SAUVEGARDER</button>
+                <button class="btn btn-secondary" onclick="downloadHTML()">📥 TÉLÉCHARGER index.html</button>
+            </div>
+
+            <!-- EDITOR -->
+            <div class="editor">
+                <div id="message" class="message"></div>
+
+                <!-- TABLEAU DE BORD -->
+                <div id="dashboard" class="section active">
+                    <h2>📊 Tableau de Bord</h2>
+                    <div class="info-box">
+                        👋 Bienvenue ! Dashboard fusionné : Hero + À Propos + Contact + Produits + Images — tout au même endroit.
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem 0;">🚀 Workflow de mise à jour</h3>
+                    <div class="step-card">
+                        <strong>1️⃣ Modifie ce que tu veux</strong>
+                        Textes, images, contacts, descriptions produits — sur n'importe quelle section.
+                    </div>
+                    <div class="step-card">
+                        <strong>2️⃣ Clique "SAUVEGARDER"</strong>
+                        Les données sont stockées dans ton navigateur (localStorage). Tu peux fermer et revenir plus tard.
+                    </div>
+                    <div class="step-card">
+                        <strong>3️⃣ Clique "TÉLÉCHARGER"</strong>
+                        Un fichier <code>index.html</code> complet est généré avec TOUT (textes + images en base64).
+                    </div>
+                    <div class="step-card">
+                        <strong>4️⃣ Upload sur GitHub</strong>
+                        Remplace l'ancien <code>index.html</code> dans ton repo.
+                    </div>
+                    <div class="step-card">
+                        <strong>5️⃣ Netlify déploie automatiquement</strong>
+                        Ton site est à jour dans 30 secondes ⏱️
+                    </div>
+                </div>
+
+                <!-- HERO -->
+                <div id="hero" class="section">
+                    <h2>🏠 Section Hero (Accueil)</h2>
+                    <div class="info-box">Cette section s'affiche en haut de ton site avec un impact visuel maximum.</div>
+
+                    <div class="form-group">
+                        <label>Titre Principal</label>
+                        <input type="text" id="heroTitle" value="Équipements de Levage & Manutention">
+                    </div>
+                    <div class="form-group">
+                        <label>Sous-titre</label>
+                        <textarea id="heroSubtitle">Solutions professionnelles pour l'industrie, le BTP, la marine et les infrastructures portuaires</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Texte du Bouton</label>
+                        <input type="text" id="heroCTA" value="📞 Nous Contacter">
+                    </div>
+                </div>
+
+                <!-- ABOUT -->
+                <div id="about" class="section">
+                    <h2>ℹ️ Section À Propos</h2>
+                    <div class="info-box">Présente ton entreprise et tes valeurs.</div>
+
+                    <div class="form-group">
+                        <label>Titre de section</label>
+                        <input type="text" id="aboutTitle" value="Qui sommes-nous ?">
+                    </div>
+                    <div class="form-group">
+                        <label>Nom de l'entreprise</label>
+                        <input type="text" id="aboutName" value="MANUBERR Group">
+                    </div>
+                    <div class="form-group">
+                        <label>Description 1</label>
+                        <textarea id="aboutText1">Spécialisés dans la production et la commercialisation des équipements de levage et de manutention, MANUBERR est un groupe indépendant solidement implanté depuis 2014 dans la région centre d'Algérie.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description 2</label>
+                        <textarea id="aboutText2">Nos solutions professionnelles répondent aux besoins les plus exigeants de l'industrie, du BTP, de la marine et des infrastructures portuaires.</textarea>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 2rem 0 1rem 0;">📊 Statistiques</h3>
+                    <div class="form-group">
+                        <label>Année de Création</label>
+                        <input type="text" id="statYear" value="2014">
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de Clients</label>
+                        <input type="text" id="statClients" value="1000+">
+                    </div>
+                    <div class="form-group">
+                        <label>Support</label>
+                        <input type="text" id="statSupport" value="24/7">
+                    </div>
+                    <div class="form-group">
+                        <label>Certification</label>
+                        <input type="text" id="statCert" value="🏆">
+                    </div>
+                </div>
+
+                <!-- CONTACT -->
+                <div id="contact" class="section">
+                    <h2>📞 Contact</h2>
+                    <div class="info-box">Mets à jour tes coordonnées.</div>
+
+                    <div class="form-group">
+                        <label>Téléphone Technique</label>
+                        <input type="tel" id="phoneTech" value="+213 (0)555 121 305">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Commercial</label>
+                        <input type="email" id="emailCommercial" value="commercial@manuberr.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Technique</label>
+                        <input type="email" id="emailTech" value="info@manuberr.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Contact</label>
+                        <input type="email" id="emailContact" value="contact@manuberr.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse Rue</label>
+                        <input type="text" id="addressLine1" value="Cité Rabah Bouchkir lot n° 42">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse Local</label>
+                        <input type="text" id="addressLine2" value="Local \"B\" Dar El Beida">
+                    </div>
+                    <div class="form-group">
+                        <label>Ville</label>
+                        <input type="text" id="city" value="Alger">
+                    </div>
+                    <div class="form-group">
+                        <label>Région</label>
+                        <input type="text" id="region" value="Centre d'Algérie">
+                    </div>
+                    <div class="form-group">
+                        <label>Pays</label>
+                        <input type="text" id="country" value="Algérie">
+                    </div>
+                </div>
+
+                <!-- PRODUCTS + IMAGES -->
+                <div id="products" class="section">
+                    <h2>📦 Produits + Images</h2>
+                    <div class="info-box">Pour chaque produit : description + image. Le tout sera intégré dans l'index.html généré.</div>
+
+                    <div class="product-category">
+                        <h3>1️⃣ Câbles et accessoires</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod1">Câbles d'acier - Câbles anti-giratoires - Câbles Inox - Câbles spéciaux - Elingues câble - Strope Grelin - Pinces tire-câbles - Tire-câbles - Cosses et serre-câbles - Douilles - Boîtes à coin - Coupe-câbles - Pinces à sertir - Graisse pour câbles</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image du produit</label>
+                            <input type="file" id="prod1Img" accept="image/*" onchange="previewImage('prod1Img','preview1')">
+                            <img id="preview1" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>2️⃣ Chaînes et accessoires</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod2">Elingues chaîne - Accessoires Grade 80 et Grade 100 - Emérillons - Anneaux DIN - Anneaux de levage Grade 80 - Anneaux de levage articulés - Crochets pour treillis soudés - Manilles de levage - Chaîne DIN</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod2Img" accept="image/*" onchange="previewImage('prod2Img','preview2')">
+                            <img id="preview2" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>3️⃣ Palans</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod3">Palans électriques - Palan pneumatique - Palans manuels - Palans à rochet - Chariots et griffes porte palan</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod3Img" accept="image/*" onchange="previewImage('prod3Img','preview3')">
+                            <img id="preview3" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>4️⃣ Treuils</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod4">Treuils électriques - Treuils pour véhicules - Treuils manuels levage & halage - Treuil à câble passant TIRFOR</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod4Img" accept="image/*" onchange="previewImage('prod4Img','preview4')">
+                            <img id="preview4" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>5️⃣ Pinces</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod5">Pinces lève-tôles - Pinces lève-poutrelles - Pinces lève-rails - Pinces lève-ronds - Pinces lève-bordures - Pinces lève-blocs - Pinces lève-fûts - Pinces lève-tuyaux</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod5Img" accept="image/*" onchange="previewImage('prod5Img','preview5')">
+                            <img id="preview5" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>6️⃣ Sangles, arrimage et cordages</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod6">Sangles plates - Elingues rondes polyester - Elingues Mécano - Sangles à maillon acier - Sangles d'arrimage - Tendeurs d'arrimage pour chaîne - Cordages - Elingues corde</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod6Img" accept="image/*" onchange="previewImage('prod6Img','preview6')">
+                            <img id="preview6" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>7️⃣ Gamme INOX</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod7">Chaînes et accessoires inox de levage - Chaîne et accessoires inox de quincaillerie - Câbles et terminaisons INOX</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod7Img" accept="image/*" onchange="previewImage('prod7Img','preview7')">
+                            <img id="preview7" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>8️⃣ Accessoires divers</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod8">Poulies - Moufles - Dynamométres digitaux - Equilibreurs - Transpalettes - Anémomètres - Plaques d'identification - Ventouses - Aimants - Coins magnétiques - Systèmes Vacuum - Réas en nylon - Ridoirs galvanisés - Tendeurs - Mousquetons - Maillons rapides - Manilles commerciales</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod8Img" accept="image/*" onchange="previewImage('prod8Img','preview8')">
+                            <img id="preview8" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>9️⃣ Sécurité & EPI</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod9">Harnais - Antichutes à sangle, à câble et à corde - Ligne de vie - Longes de maintien - Connecteurs - Trépieds - Points d'ancrage - Lampes frontales</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod9Img" accept="image/*" onchange="previewImage('prod9Img','preview9')">
+                            <img id="preview9" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>🔟 Rouleurs</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod10">Rouleurs pour charges lourdes - Plateaux rouleurs</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod10Img" accept="image/*" onchange="previewImage('prod10Img','preview10')">
+                            <img id="preview10" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>1️⃣1️⃣ Crics, vérins et tables élévatrices</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod11">Crics mécaniques et hydrauliques - Coussin de levage - Vérins mécaniques et hydrauliques - Pompes - Accessoires hydrauliques - Tables élévatrices</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod11Img" accept="image/*" onchange="previewImage('prod11Img','preview11')">
+                            <img id="preview11" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="product-category">
+                        <h3>1️⃣2️⃣ Essuyage & textile</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="prod12">Chiffons de nettoyage en tricot - Chiffons blanc draps recyclés - Chiffons en coton Multicolore</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" id="prod12Img" accept="image/*" onchange="previewImage('prod12Img','preview12')">
+                            <img id="preview12" class="image-preview" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---- Aperçu image ----
+        function previewImage(inputId, previewId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    localStorage.setItem(inputId, e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ---- Charger images + textes sauvegardés ----
+        function loadAll() {
+            // Textes
+            const saved = localStorage.getItem('manuberrFusion');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    Object.keys(data).forEach(key => {
+                        const elem = document.getElementById(key);
+                        if (elem && !key.endsWith('Img')) {
+                            elem.value = data[key];
+                        }
+                    });
+                } catch(e) { console.warn('Erreur chargement:', e); }
+            }
+            // Images
+            for (let i = 1; i <= 12; i++) {
+                const id = 'prod' + i + 'Img';
+                const previewId = 'preview' + i;
+                const src = localStorage.getItem(id);
+                if (src) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = src;
+                    preview.style.display = 'block';
+                }
+            }
+        }
+
+        // ---- Switch section ----
+        function switchSection(name) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+        }
+
+        // ---- Message ----
+        function showMessage(text) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message success';
+            setTimeout(() => { msg.className = 'message'; }, 4000);
+        }
+
+        // ---- Sauvegarder ----
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(input => {
+                if (input.id) data[input.id] = input.value;
+            });
+            localStorage.setItem('manuberrFusion', JSON.stringify(data));
+            showMessage('✅ Toutes les données sauvegardées dans ton navigateur !');
+        }
+
+        // ---- Télécharger le HTML complet ----
+        function downloadHTML() {
+            saveData();
+            const data = {};
+            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(input => {
+                if (input.id) data[input.id] = input.value;
+            });
+            // Ajouter les images depuis localStorage
+            for (let i = 1; i <= 12; i++) {
+                data['prod' + i + 'Img'] = localStorage.getItem('prod' + i + 'Img') || '';
+            }
+
+            const html = generateHTML(data);
+            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessage('✅ index.html téléchargé ! Uploade-le sur GitHub → Netlify déploie automatiquement.');
+        }
+
+        // ---- Génération du HTML final ----
+        function generateHTML(data) {
+            const titles = ['Câbles & Accessoires','Chaînes & Accessoires','Palans','Treuils','Pinces','Sangles & Cordages','Gamme INOX','Accessoires Divers','Sécurité & EPI','Rouleurs','Crics & Tables','Essuyage & Textile'];
+            const icons  = ['🔗','⛓️','⬆️','🔄','🤝','🎯','✨','⚙️','🔒','🛞','🔨','🧹'];
+
+            let productsHTML = '';
+            for (let i = 1; i <= 12; i++) {
+                const img = data['prod' + i + 'Img'];
+                const idx = i - 1;
+                const safeDesc = (data['prod' + i] || '').replace(/`/g, '\\`');
+                productsHTML += `
+                <div class="product-card">
+                    ${img ? `<img src="${img}" class="product-image" alt="${titles[idx]}">` : ''}
+                    <h3>${icons[idx]} ${titles[idx]}</h3>
+                    <p>${data['prod' + i] || ''}</p>
+                </div>`;
+            }
+
+            // Échapper les backticks pour template literals
+            const t = (k) => (data[k] || '');
+
+            return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MANUBERR - Équipements de Levage & Manutention</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333}
+header{background:linear-gradient(135deg,#003A99 0%,#004BA8 100%);color:white;padding:2rem;position:sticky;top:0;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:100}
+.header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:24px;font-weight:bold}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:white;text-decoration:none;transition:opacity 0.3s}
+.nav-links a:hover{opacity:0.8}
+.hero{background:linear-gradient(135deg,#003A99 0%,#004BA8 100%);color:white;padding:6rem 2rem;text-align:center}
+.hero h1{font-size:48px;margin-bottom:1rem}
+.hero p{font-size:20px;margin-bottom:2rem;opacity:0.9}
+.btn{display:inline-block;background:#FFA500;color:white;padding:14px 32px;border-radius:4px;text-decoration:none;font-weight:600;transition:all 0.3s}
+.btn:hover{background:#FF8C00;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+section{padding:4rem 0;border-bottom:1px solid #eee}
+section.bg-gray{background:#f9f9f9}
+h2{color:#003A99;font-size:36px;margin-bottom:3rem;text-align:center}
+.about-content{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-text h3{color:#003A99;font-size:24px;margin-bottom:1rem}
+.about-text p{margin-bottom:1rem;color:#666;line-height:1.8}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat{background:#f9f9f9;padding:1.5rem;border-radius:8px;text-align:center}
+.stat .number{font-size:32px;color:#FFA500;font-weight:bold}
+.stat .label{color:#003A99;font-size:14px;margin-top:0.5rem}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.product-card{background:white;padding:2rem;border-radius:8px;border-left:4px solid #FFA500;box-shadow:0 4px 12px rgba(0,0,0,0.1);transition:all 0.3s}
+.product-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.product-image{width:100%;height:200px;object-fit:cover;border-radius:4px;margin-bottom:1rem}
+.product-card h3{color:#003A99;margin-bottom:1rem;font-size:18px}
+.product-card p{color:#666;font-size:13px;line-height:1.6}
+.contact-section{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-info{background:#f9f9f9;padding:2rem;border-radius:8px}
+.contact-item{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid #eee}
+.contact-item:last-child{border-bottom:none}
+.contact-item h3{color:#003A99;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.75rem;font-size:18px}
+.contact-item .icon{font-size:24px;color:#FFA500;width:30px;text-align:center}
+.contact-item p{margin-bottom:0.5rem;color:#666}
+.contact-item a{color:#003A99;text-decoration:none;font-weight:500}
+.contact-item a:hover{text-decoration:underline}
+.address-box{background:white;padding:2rem;border-radius:8px;border-left:4px solid #FFA500}
+.address-box h3{color:#003A99;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem}
+.address-box p{line-height:1.8;color:#666}
+footer{background:#333;color:white;text-align:center;padding:2rem}
+footer p{opacity:0.9}
+@media(max-width:768px){
+  .header-content{flex-direction:column;gap:1rem}
+  .nav-links{flex-direction:column;gap:1rem;text-align:center}
+  .hero h1{font-size:32px}
+  .about-content,.contact-section,.products-grid{grid-template-columns:1fr}
+  h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo">🏭 MANUBERR</div>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#apropos">À Propos</a></li>
+      <li><a href="#produits">Produits</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="accueil">
+  <h1>${t('heroTitle')}</h1>
+  <p>${t('heroSubtitle')}</p>
+  <a href="#contact" class="btn">${t('heroCTA')}</a>
+</section>
+
+<section id="apropos">
+  <div class="container">
+    <h2>${t('aboutTitle')}</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>${t('aboutName')}</h3>
+        <p>${t('aboutText1')}</p>
+        <p>${t('aboutText2')}</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><div class="number">${t('statYear')}</div><div class="label">Année de création</div></div>
+        <div class="stat"><div class="number">${t('statClients')}</div><div class="label">Clients satisfaits</div></div>
+        <div class="stat"><div class="number">${t('statSupport')}</div><div class="label">Support technique</div></div>
+        <div class="stat"><div class="number">${t('statCert')}</div><div class="label">Certifiés ISO</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="produits" class="bg-gray">
+  <div class="container">
+    <h2>📦 Nos Produits</h2>
+    <div class="products-grid">
+      ${productsHTML}
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Nous Contacter</h2>
+    <div class="contact-section">
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3><span class="icon">📞</span>Service Technique & Commercial</h3>
+          <p><strong>Téléphone :</strong></p>
+          <p>${t('phoneTech')}</p>
+        </div>
+        <div class="contact-item">
+          <h3><span class="icon">📧</span>Emails</h3>
+          <p><strong>Commercial :</strong> <a href="mailto:${t('emailCommercial')}">${t('emailCommercial')}</a></p>
+          <p><strong>Technique :</strong> <a href="mailto:${t('emailTech')}">${t('emailTech')}</a></p>
+          <p><strong>Contact :</strong> <a href="mailto:${t('emailContact')}">${t('emailContact')}</a></p>
+        </div>
+        <div class="contact-item">
+          <h3><span class="icon">🌐</span>Site Web</h3>
+          <p><a href="https://www.manuberr.com">www.manuberr.com</a></p>
+        </div>
+      </div>
+      <div class="address-box">
+        <h3>📍 Notre Adresse</h3>
+        <p>
+          ${t('addressLine1')}<br>
+          ${t('addressLine2')}<br>
+          ${t('city')}, ${t('country')}<br><br>
+          <strong>Région :</strong> ${t('region')}<br>
+          <strong>Pays :</strong> ${t('country')}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024 MANUBERR Group. Tous droits réservés. | Équipements de Levage & Manutention</p>
+  <p>${t('emailContact')} | ${t('phoneTech')}</p>
+</footer>
+</body>
+</html>`;
+        }
+
+        // Init
+        window.addEventListener('DOMContentLoaded', loadAll);
+    </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>
